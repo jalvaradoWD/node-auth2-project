@@ -9,21 +9,24 @@ const registerUser = async (req, res) => {
    * username
    * password
    */
+  const { username, password, department } = req.body;
+
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     await knex("users").insert({ ...req.body, password: hashedPassword });
 
     const createdUser = {
-      username: req.body.username,
+      username,
       password: hashedPassword,
-      department: req.body.department,
+      department,
     };
 
     const token = jwt.sign(createdUser, process.env.JWT_SECRET);
 
     return res.json({ message: "User created", token });
   } catch (error) {
+    console.log(error);
     return error;
   }
 };
