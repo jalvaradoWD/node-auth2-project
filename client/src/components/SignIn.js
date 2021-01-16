@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
+import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 
 const SignIn = (props) => {
   const [submitted, setSubmitted] = useState(false);
@@ -34,30 +35,30 @@ const SignIn = (props) => {
   };
 
   return !submitted ? (
-    <form onSubmit={formSubmit}>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
+    <Form onSubmit={formSubmit}>
+      <FormGroup>
+        <Label htmlFor="username">Username</Label>
+        <Input
           onChange={onFormChange}
           type="text"
           id="username"
           name="username"
           placeholder="username"
         />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Label htmlFor="password">Password</Label>
+        <Input
           onChange={onFormChange}
           type="password"
           id="password"
           name="password"
           placeholder="password"
         />
-      </div>
+      </FormGroup>
 
-      <button type="submit">Sign In</button>
-    </form>
+      <Button type="submit">Sign In</Button>
+    </Form>
   ) : (
     <Redirect to="/" />
   );

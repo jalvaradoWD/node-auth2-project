@@ -4,6 +4,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import UsersList from "./components/UsersList";
 import { useEffect, useState } from "react";
+import { Container } from "reactstrap";
 
 const App = () => {
   const [tokenExist, setTokenExist] = useState();
@@ -15,20 +16,22 @@ const App = () => {
   return (
     <Router>
       <NavBar tokenExist={tokenExist} setTokenExist={setTokenExist} />
-      <h1>Home Route</h1>
+      <h1 className="display-4 text-center">Home Route</h1>
 
       <Switch>
-        <Route
-          exact
-          path="/signin"
-          render={() => <SignIn setTokenExist={setTokenExist} />}
-        />
-        <Route
-          exact
-          path="/signup"
-          render={() => <SignUp setTokenExist={setTokenExist} />}
-        />
-        <Route exact path="/users" component={UsersList} />
+        <Container>
+          <Route
+            exact
+            path="/signin"
+            render={() => <SignIn setTokenExist={setTokenExist} />}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={() => <SignUp setTokenExist={setTokenExist} />}
+          />
+          <Route exact path="/users" component={UsersList} />
+        </Container>
       </Switch>
     </Router>
   );
